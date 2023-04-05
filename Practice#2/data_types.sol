@@ -6,7 +6,7 @@ import "Task2.sol";
 contract DataTypes is IDataTypesPractice{
    int256 public temperature;
    uint256 public year;
-   int8 public procent;
+   int8 public percent;
    uint8 public month;
    bool public isDone;
    address public wallet;
@@ -18,7 +18,7 @@ contract DataTypes is IDataTypesPractice{
    constructor() {
         temperature = -100;
         year = 2023;
-        procent = -55;
+        percent = -55;
         month = 12;
         isDone = true;
         wallet = 0xe7FAF394998dFeEB8CC7da36404551878428E856;
@@ -37,7 +37,7 @@ contract DataTypes is IDataTypesPractice{
     }
 
     function getInt8() external view returns (int8){
-        return procent;
+        return percent;
     }
 
     function getUint8() external view returns (uint8){
@@ -72,6 +72,6 @@ contract DataTypes is IDataTypesPractice{
         uint256 v1 = 1;
         uint256 v2 = 2;
 
-        return v1-v2;
+        return (++v2)**((v2+v2)*(v1<<v2));
     }
 }
