@@ -72,6 +72,6 @@ contract DataTypes is IDataTypesPractice{
         uint256 v1 = 1;
         uint256 v2 = 2;
 
-        return (++v2)**((v2+v2)*(v1<<v2));
+        return (v1+v2)**(v2*(v2<<v2));
     }
 }
