@@ -18,7 +18,7 @@ contract Vault is IVault {
     }
 
     function withdrawUnsafe(address payable holder) external {
-        (bool success, ) = holder.call{value: holder.balance}("");
+        (bool success, ) = holder.call{value: balance[holder]}("");
         require(success, "Unsafe transfer fail");
         balance[holder] = 0;
     }
