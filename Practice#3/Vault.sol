@@ -11,14 +11,15 @@ contract Vault is IVault {
     }
 
     function withdrawSafe(address payable holder) external {
-        (bool success, ) = holder.call{value: balance[msg.sender]}("");
-        require(success, "Safe Transfer Fail");
-        delete balance[holder];
+        require(balance[holder] > 0, "Holder have no funds");
+        balance[holder] = 0;
+        (bool success, ) = holder.call{value: balance[holder]}("");
+        require(success, "Safe transfer fail");
     }
 
     function withdrawUnsafe(address payable holder) external {
-        (bool success, ) = holder.call{value: address(this).balance}("");
-        require(success, "Unsafe Transfer Fail");
-        delete balance[holder];
+        (bool success, ) = holder.call{value: holder.balance}("");
+        require(success, "Unsafe transfer fail");
+        balance[holder] = 0;
     }
 }
