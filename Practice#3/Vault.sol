@@ -28,7 +28,7 @@ contract Vault is IVault {
         uint256 amount = balance[holder];
         require(amount > 0, "Holder have no funds");
         (bool success, ) = holder.call{value: amount}("");
-        balance[holder] = 0;
         require(success, "Unsafe transfer fail");
+        balance[holder] = 0;
     }
 }
